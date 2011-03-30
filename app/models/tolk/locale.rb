@@ -43,6 +43,7 @@ module Tolk
       'sl'    => 'Slovenian',
       'sr'    => 'Serbian',
       'sw'    => 'Swahili',
+      'sv'    => 'Swedish',
       'th'    => 'Thai',
       'tr'    => 'Turkish',
       'uk'    => 'Ukrainian',
