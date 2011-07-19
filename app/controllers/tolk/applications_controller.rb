@@ -1,3 +1,4 @@
+# I know, worst naming ever...
 module Tolk
   class ApplicationsController < Tolk::ApplicationController
     def index

@@ -27,6 +27,7 @@
         <% if phrase.translations.primary %>
           <tr>
             <td class="translation">
+              <%= hidden_field_tag :"translations[][application_id]", @application.id%>
               <%= hidden_field_tag :"translations[][id]", phrase.translation.id %>
               <%= hidden_field_tag :"translations[][locale_id]", phrase.translation.locale_id %>
               <%= text_area_tag :"translations[][text]", format_i18n_text_area_value(phrase.translation.text), :class => 'locale',
