@@ -1,15 +1,18 @@
 <% content_for :locale do %>
   <span class="locale"><%= @locale.language_name %></span>
 <% end %>
+<% content_for :app_name do %><span class="app_with_locale"><%= link_to @application.name, tolk_application_locales_path(@application) %></span>
+<% end %>
+
 
 <h3 class="search">
   <%= render :partial => "form", :locals => { :locale => @locale } %>
 </h3>
 
 <div class="search_exits">
-  <%= link_to "Phrases missing translation", @locale %>
+  <%= link_to "Phrases missing translation", tolk_application_locale_path(@application,@locale) %>
   &nbsp;
-  <%= link_to "Completed translations", all_tolk_locale_path(@locale) %>
+  <%= link_to "Completed translations", tolk_all_locales_path(@application,@locale) %>
 </div>
 
 <div class="translations">

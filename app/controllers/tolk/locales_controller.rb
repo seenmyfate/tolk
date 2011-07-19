@@ -1,10 +1,11 @@
 module Tolk
   class LocalesController < Tolk::ApplicationController
+    before_filter :find_application
     before_filter :find_locale, :only => [:show, :all, :update, :updated]
     before_filter :ensure_no_primary_locale, :only => [:all, :update, :show, :updated]
 
     def index
-      @locales = Tolk::Locale.secondary_locales
+      @locales = @application.secondary_locales
     end
   
     def show
@@ -34,13 +35,17 @@ module Tolk
 
     def create
       Tolk::Locale.create!(params[:tolk_locale])
-      redirect_to :action => :index
+      redirect_to tolk_application_locales_path(@application, @locale)
     end
 
     private
 
     def find_locale
-      @locale = Tolk::Locale.find_by_name!(params[:id])
+      @locale = @application.locales.find_by_name!(params[:id])
+    end
+
+    def find_application
+      @application = Tolk::Application.find(params[:application_id])
     end
   end
 end

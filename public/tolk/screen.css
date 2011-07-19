@@ -94,6 +94,19 @@ div#head span.locale {
   border-bottom-right-radius: 10px;
 }
 
+div#head span.app {
+  color: #fff;
+  font-weight: bold;
+  background: #444;
+  padding: 8px 12px 8px 6px;
+  -webkit-border-top-right-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
 div#head span.locale.empty {
   background: #333;
   padding-left: 0;
@@ -101,6 +114,10 @@ div#head span.locale.empty {
 }
 
 div#head span.locale em {
+  font-style: normal;
+  font-weight: normal;
+}
+div#head span.app em {
   font-style: normal;
   font-weight: normal;
 }

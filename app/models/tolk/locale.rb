@@ -65,7 +65,6 @@ module Tolk
     include Tolk::Sync
     include Tolk::Import
 
-    validates_uniqueness_of :name
     validates_presence_of :name
 
     cattr_accessor :special_prefixes
@@ -127,6 +126,12 @@ module Tolk
       existing_ids = self.translations.all(:select => 'tolk_translations.phrase_id').map(&:phrase_id).uniq
       Tolk::Phrase.count - existing_ids.count
     end
+
+    def count_phrases_without_translation_for_app(app)
+      existing_ids = app.translations.all(:select => 'tolk_translations.phrase_id').map(&:phrase_id).uniq
+      app.phrases.count - existing_ids.count
+    end
+
 
     def phrases_without_translation(page = nil, options = {})
       phrases = Tolk::Phrase.scoped(:order => 'tolk_phrases.key ASC')

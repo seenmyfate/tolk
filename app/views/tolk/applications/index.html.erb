@@ -1,0 +1,29 @@
+<% content_for :locale do %><span class="locale empty"></span>
+<% end %>
+<h2>Applications</h2>
+<% if @applications.any? %>
+  <ul class="locales clearfix">
+    <% @applications.each do |app| %>
+      <li>
+        <%= link_to app.name, tolk_application_locales_path(app) %>
+      </li>
+    <% end %>
+  </ul>
+  
+<% else %>
+  <p>No apps yet.</p>
+
+<% end %>
+<%= form_for(Tolk::Application.new) do |f| %>
+<div class="submit">
+  <%= f.error_messages %>
+  <p>
+    <%= f.label "Add a new Application" %>
+    <%= f.text_field :name %>
+    <%= f.submit 'Add' %>
+  </p>
+</div>
+<% end %>
+
+
+

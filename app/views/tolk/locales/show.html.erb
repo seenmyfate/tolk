@@ -1,15 +1,17 @@
 <% content_for :locale do %>
   <span class="locale"><%= @locale.language_name %></span>
 <% end %>
-
-<% content_for :head do %>
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="<%= tolk_locale_path(@locale, :format => 'atom') -%>" />
+<% content_for :app_name do %><span class="app_with_locale"><%= link_to @application.name, tolk_application_locales_path(@application) %></span>
 <% end %>
 
-<h3 class="switch">Phrases missing translation (<%= @locale.count_phrases_without_translation %>) <span>(<%= link_to 'See completed translations', all_tolk_locale_path(@locale) %>)</span></h3>
+<% content_for :head do %>
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="<%= tolk_application_locale_path(@application, @locale, :format => 'atom') -%>" />
+<% end %>
+
+<h3 class="switch">Phrases missing translation (<%= @locale.count_phrases_without_translation %>) <span>(<%= link_to 'See completed translations', tolk_all_locales_path(@application,@locale) %>)</span></h3>
 
 <% if @locale.has_updated_translations? && action_name != 'updated' %>
-  <span class="notice">Some phrases have changed. <%= link_to "Update translations", updated_tolk_locale_path(@locale) %>.</span>
+  <span class="notice">Some phrases have changed. <%= link_to "Update translations", tolk_updated_locales_path(@application,@locale) %>.</span>
 <% end %>
 
 <div class="search">
@@ -18,7 +20,8 @@
 
 <div class="translations">
   <% if @phrases.any? %>
-     <%= form_for @locale do |locale_form| %>
+    <%= form_for(@locale) do |locale_form| %>
+      <%= hidden_field_tag :application_id, @application.id %>
       <table class="translations">
         <tr>
           <th class="translation"><%= @locale.language_name -%></th>
