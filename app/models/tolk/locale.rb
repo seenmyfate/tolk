@@ -176,9 +176,9 @@ module Tolk
     def to_hash
       { name => translations.each_with_object({}) do |translation, locale|
         if translation.phrase.key.include?(".")
-          locale.deep_merge!(unsquish(translation.phrase.key, translation.value.chomp))
+          locale.deep_merge!(unsquish(translation.phrase.key, chomping(translation.value)))
         else
-          locale[translation.phrase.key] = translation.value.chomp
+          locale[translation.phrase.key] = chomping(translation.value)
         end
       end }
     end
@@ -210,6 +210,14 @@ module Tolk
     end
 
     private
+
+    def chomping(value)
+      if value.is_a? String
+        value.chomp
+      else
+        value
+      end
+    end
 
     def remove_invalid_translations_from_target
       self.translations.proxy_target.each do |t|
