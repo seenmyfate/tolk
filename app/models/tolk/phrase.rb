@@ -1,7 +1,7 @@
 module Tolk
   class Phrase < ActiveRecord::Base
     set_table_name "tolk_phrases"
-    validates_uniqueness_of :key
+    #validates_uniqueness_of [:key, :application_id]
 
     cattr_accessor :per_page
     self.per_page = 30
