@@ -176,9 +176,9 @@ module Tolk
     def to_hash
       { name => translations.each_with_object({}) do |translation, locale|
         if translation.phrase.key.include?(".")
-          locale.deep_merge!(unsquish(translation.phrase.key, translation.value))
+          locale.deep_merge!(unsquish(translation.phrase.key, translation.value.chomp))
         else
-          locale[translation.phrase.key] = translation.value
+          locale[translation.phrase.key] = translation.value.chomp
         end
       end }
     end
