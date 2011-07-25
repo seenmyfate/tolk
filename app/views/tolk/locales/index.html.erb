@@ -11,7 +11,7 @@
         <%= link_to locale.language_name, tolk_application_locale_path(@application,locale) %>
         <% missing_count = locale.count_phrases_without_translation_for_app(@application) %>
         <% if missing_count > 0 %>
-          <span class="missing_translations"><%= locale.count_phrases_without_translation %></span>
+          <span class="missing_translations"><%= missing_count %></span>
         <% end %>
       </li>
     <% end %>

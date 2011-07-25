@@ -74,6 +74,11 @@ module Tolk
     self.special_keys = ['activerecord.models']
 
     class << self
+
+      def starting_point_locales
+        ["da", "nl", "de", "es", "fi", "fr", "it", "no", "pl", "ro", "ru", "sv", "tr"]
+      end
+
       def primary_locale(reload = false)
         @_primary_locale = nil if reload
         @_primary_locale ||= begin
