@@ -62,6 +62,9 @@ module Tolk
     cattr_accessor :primary_locale_name
     self.primary_locale_name = I18n.default_locale.to_s
 
+    cattr_accessor :upload_file_path
+    self.upload_file_path = "#{Rails.root}/lib/translations"
+
     include Tolk::Sync
     include Tolk::Import
 

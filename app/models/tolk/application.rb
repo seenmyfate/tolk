@@ -20,7 +20,7 @@ module Tolk
     end
 
     def import_secondary_locales
-      #Tolk::Locale.import_secondary_locales
+      Tolk::Locale.import_secondary_locales(self)
     end
 
     def primary_locale_name

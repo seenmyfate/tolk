@@ -6,18 +6,19 @@ module Tolk
 
     module ClassMethods
 
-      def import_secondary_locales
-        locales = Dir.entries(self.locales_config_path)
+      def import_secondary_locales(app)
+        puts "Importing locales for #{app.name}"
+        locales = Dir.entries("#{self.upload_file_path}/#{app.name}")
         locales = locales.reject {|l| ['.', '..'].include?(l) || !l.ends_with?('.yml') }.map {|x| x.split('.').first } - [Tolk::Locale.primary_locale.name]
 
-        locales.each {|l| import_locale(l) }
+        locales.each {|l| import_locale(l,app) }
       end
 
-      def import_locale(locale_name)
-        locale = Tolk::Locale.find_or_create_by_name(locale_name)
+      def import_locale(locale_name, app)
+        locale = app.find_or_create_by_name(locale_name)
         data = locale.read_locale_file
 
-        phrases = Tolk::Phrase.all
+        phrases = app.phrases
         count = 0
 
         data.each do |key, value|
