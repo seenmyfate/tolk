@@ -15,8 +15,8 @@ module Tolk
       end
 
       def import_locale(locale_name, app)
-        locale = app.find_or_create_by_name(locale_name)
-        data = locale.read_locale_file
+        locale = app.locales.find_or_create_by_name(locale_name)
+        data = locale.read_locale_file(app)
 
         phrases = app.phrases
         count = 0
@@ -37,8 +37,8 @@ module Tolk
 
     end
 
-    def read_locale_file
-      locale_file = "#{self.locales_config_path}/#{self.name}.yml"
+    def read_locale_file(app)
+      locale_file = "#{self.upload_file_path}/#{app.name}/#{self.name}.yml"
       raise "Locale file #{locale_file} does not exists" unless File.exists?(locale_file)
 
       self.class.flat_hash(YAML::load(IO.read(locale_file))[self.name])

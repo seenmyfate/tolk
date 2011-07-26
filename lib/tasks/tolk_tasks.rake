@@ -29,7 +29,6 @@ namespace :tolk do
     name = STDIN.gets.chomp
     if app = Tolk::Application.find_by_name(name)
       puts "importing #{app.name}"
-      Rake::Task['tolk:sync'].invoke
       app.import_secondary_locales
     else
       puts "Couldn't find application, trying syncing with heroku db:pull"
