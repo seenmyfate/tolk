@@ -21,6 +21,9 @@ module Tolk
     def update
       @locale.translations_attributes = params[:translations]
       @locale.save
+      if @locale.errors.any?
+        flash[:notice] = @locale.errors[:"translations.text"].join(',')
+      end
       redirect_to request.referrer
     end
 
